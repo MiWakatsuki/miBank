@@ -1,10 +1,15 @@
+import { IsBoolean, IsNumber, IsString } from "class-validator";
+
 export class CreateAccountDto {
-   
+    @IsNumber()
     accountnumber: number;
    
+    @IsString()
     accountType: string;
    
-    isActive?: boolean; // Optional, defaults to true if not provided
+    @IsBoolean()
+    isActive: boolean; 
    
+    @IsNumber()
     userId: number; // Foreign key to associate with User
 }

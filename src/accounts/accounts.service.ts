@@ -25,6 +25,8 @@ export class AccountsService {
   }
 
   update(id: number, updateAccountDto: UpdateAccountDto) {
+    
+
     return this.accountRepository.update(id, updateAccountDto);
   }
 

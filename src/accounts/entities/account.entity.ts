@@ -16,9 +16,9 @@ export class Account {
     isActive: boolean;
 
     @ManyToOne(() => User, (user) => user.accounts)
-  user: User;
+    user: User;
 
     @Column()
-  userId: number;
+    userId: number;
 
 }
