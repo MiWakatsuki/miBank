@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
 import { Account } from './entities/account.entity';
@@ -20,17 +20,33 @@ export class AccountsService {
     return this.accountRepository.find();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
+    const account = await this.accountRepository.findOneBy({ id });
+
+    if (!account) {
+      throw new NotFoundException(`Account with ID ${id} not found`);
+    }
+
     return this.accountRepository.findOneBy({ id });
   }
 
-  update(id: number, updateAccountDto: UpdateAccountDto) {
-    
+  async update(id: number, updateAccountDto: UpdateAccountDto) {
+    const account = await this.accountRepository.findOneBy({ id });
+
+    if (!account) {
+      throw new NotFoundException(`Account with ID ${id} not found`);
+    }
 
     return this.accountRepository.update(id, updateAccountDto);
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    const account = await this.accountRepository.findOneBy({ id });
+
+    if (!account) {
+      throw new NotFoundException(`Account with ID ${id} not found`);
+    }
+
     return this.accountRepository.delete(id);
   }
 }

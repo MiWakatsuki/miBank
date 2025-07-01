@@ -1,12 +1,13 @@
-import { IsBoolean, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateAccountDto {
     @IsNumber()
-    accountnumber: number;
+    accountNumber: number;
    
     @IsString()
     accountType: string;
    
+    @IsOptional()
     @IsBoolean()
     isActive: boolean; 
    
