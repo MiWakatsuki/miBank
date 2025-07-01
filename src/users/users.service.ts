@@ -20,7 +20,13 @@ export class UsersService {
     return this.userRepository.find();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
+    const user = await this.userRepository.findOneBy({ id });
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
     return this.userRepository.findOneBy({ id });
   }
 
