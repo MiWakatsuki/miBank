@@ -2,8 +2,10 @@ import { Transaction } from 'src/transactions/entities/transaction.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 
+
 @Entity ()
-export class Card {
+export class Card{
+
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -18,6 +20,12 @@ export class Card {
 
     @Column({ type: 'timestamp', default: () => 'current_timestamp()' })
     createdAt: Date;
+
+    @Column({ default: true })
+    isActive: boolean;
+
+    @Column()
+    status: string;
 
     @ManyToOne(() => User, (user) => user.cards)
     user: User;

@@ -1,3 +1,4 @@
+import { Type } from "class-transformer";
 import { IsDate, IsNumber, IsString } from "class-validator";
 
 export class CreateCardDto {
@@ -7,13 +8,13 @@ export class CreateCardDto {
     @IsString()
     cardCvv: string;
 
+    @Type(() => Date)
     @IsDate()
-    CardExpirationDate: Date;
+    cardExpirationDate: Date;
 
     @IsNumber()
     userId: number; // Foreign key to associate with User
 
-    @IsNumber()
-    transactionId?: number; // Foreign key to associate with Transaction
+    status?: string; // Status of the card, e.g., 'active', 'inactive'
 
 }

@@ -4,15 +4,18 @@ import { UpdateCardDto } from './dto/update-card.dto';
 import { Card } from './entities/card.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { StatusCards } from './enums/status-cards.enum';
 
 @Injectable()
 export class CardsService {
+
   constructor(
     @InjectRepository(Card)
     private cardRepository: Repository<Card>,
   ) {}
 
   create(createCardDto: CreateCardDto) {
+    createCardDto.status = StatusCards.ACTIVE; // Set default status to ACTIVE 
     return this.cardRepository.save(createCardDto);
   }
 
